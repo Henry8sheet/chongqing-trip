@@ -18,6 +18,9 @@ header p{margin:4px 0 0;opacity:.85;font-size:14px}
 .sum .big{font-size:28px;font-weight:700;color:var(--red);font-variant-numeric:tabular-nums}
 .sum .row{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:var(--mute);margin-top:4px}
 .sum .row b{color:var(--ink);font-variant-numeric:tabular-nums}
+.sync{font-size:13px;color:var(--mute);margin-top:6px;cursor:pointer}
+.sync.ok::before{content:'● ';color:var(--ok)}
+.sync.bad::before{content:'● ';color:var(--gold)}
 .rate{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--mute);margin-top:8px}
 .rate input{width:64px}
 nav{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;gap:8px;overflow-x:auto;padding:10px 0;margin-top:8px;scrollbar-width:none}
@@ -71,6 +74,7 @@ footer{color:var(--mute);font-size:12px;text-align:center;margin-top:20px}
   <div style="font-size:13px;color:var(--mute)">目前總花費（換算台幣）</div>
   <div class="big" id="total">NT$0</div>
   <div class="row"><span>人民幣 <b id="tCny">¥0</b></span><span>台幣 <b id="tTwd">NT$0</b></span></div>
+  <div class="sync" id="sync" hidden></div>
   <div class="rate">匯率：1 人民幣 = <input id="rate" type="number" step="0.01" inputmode="decimal"> 台幣</div>
 </div>
 <nav id="nav"></nav>
@@ -97,7 +101,7 @@ footer{color:var(--mute);font-size:12px;text-align:center;margin-top:20px}
 <li><b>天氣：</b>11 月重慶約 12–18°C、潮濕多霧，帶薄外套、穿好走的鞋。南山夜景看天氣，霧大就換一晚。</li>
 <li><b>省錢吃法：</b>早餐路邊小麵 7–10 元；火鍋去大坪、上新街巷弄的洞子火鍋，人均 60–100 元；沾碟「香油＋蒜泥」，配唯怡豆奶解辣。</li>
 </ul></section>
-<footer>花費只存在這台手機／電腦的瀏覽器裡，換裝置不會同步，可用「匯出 CSV」備份。</footer>
+<footer id="foot">花費只存在這台手機／電腦的瀏覽器裡，換裝置不會同步，可用「匯出 CSV」備份。</footer>
 </div>
 <script>
 const DAYS=[
@@ -179,6 +183,8 @@ const SEED2=[
 {id:'h0',day:'pre',name:'重慶亞朵酒店 11/14–11/19（5晚）',amt:2119.84,cur:'CNY',cat:'住宿'},
 {id:'h1',day:'pre',name:'重慶亞朵酒店 11/19–11/20（1晚）',amt:441.36,cur:'CNY',cat:'住宿'},
 ];
+// 貼上 Google Apps Script 網頁應用程式網址即可啟用兩支手機同步；留空則只存在本機
+const SYNC_URL='';
 const KEY='cq-trip-2026';
 let mem=null;
 function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&Array.isArray(s.exp))return s}catch(e){}
@@ -205,8 +211,9 @@ function build(){
   document.querySelectorAll('form').forEach(f=>f.addEventListener('submit',ev=>{ev.preventDefault();
     const amt=parseFloat(f.amt.value);if(!f.name.value.trim()||!(amt>=0))return;
     S.exp.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,5),day:f.dataset.f,name:f.name.value.trim(),amt,cur:f.cur.value,cat:f.cat.value});
+    queue({action:'add',item:S.exp[S.exp.length-1]});
     f.name.value='';f.amt.value='';save();render();}));
-  $('#days').addEventListener('click',ev=>{const b=ev.target.closest('[data-del]');if(!b)return;S.exp=S.exp.filter(e=>e.id!==b.dataset.del);save();render();});
+  $('#days').addEventListener('click',ev=>{const b=ev.target.closest('[data-del]');if(!b)return;S.exp=S.exp.filter(e=>e.id!==b.dataset.del);queue({action:'del',id:b.dataset.del});save();render();});
 }
 function render(){
   $('#rate').value=S.rate;
@@ -225,8 +232,41 @@ $('#csv').addEventListener('click',()=>{
   const csv='﻿'+rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='重慶花費.csv';a.click();});
 let armed=0;
-$('#reset').addEventListener('click',e=>{if(Date.now()-armed<4000){S.exp=[];save();render();e.target.textContent='清空全部花費';armed=0}else{armed=Date.now();e.target.textContent='再按一次確認清空'}});
-build();render();
+$('#reset').addEventListener('click',e=>{if(Date.now()-armed<4000){S.exp.forEach(x=>queue({action:'del',id:x.id},true));S.exp=[];save();sync();render();e.target.textContent='清空全部花費';armed=0}else{armed=Date.now();e.target.textContent='再按一次確認清空'}});
+
+// ---- 兩支手機同步（Google 試算表）----
+const isSeed=id=>/^[sh]\d$/.test(id);
+let syncing=false,again=false;
+function status(t,c){const el=$('#sync');if(!SYNC_URL)return;el.hidden=false;el.textContent=t;el.className='sync '+(c||'')}
+function queue(op,hold){if(!SYNC_URL)return;S.pending=S.pending||[];S.pending.push(op);if(!hold){save();sync()}}
+async function call(body){
+  const r=await fetch(SYNC_URL,body?{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}:{cache:'no-store'});
+  const d=await r.json();if(!d||!d.ok||!Array.isArray(d.exp))throw new Error('bad response');return d}
+async function sync(){
+  if(!SYNC_URL)return;if(syncing){again=true;return}
+  syncing=true;again=false;S.pending=S.pending||[];status('同步中…');
+  try{
+    let data=null;
+    if(!S.synced){
+      data=await call();const have=new Set(data.exp.map(e=>e.id)),empty=!data.exp.length;
+      const up=S.exp.filter(e=>!have.has(e.id)&&(empty||!isSeed(e.id))).map(item=>({action:'add',item}));
+      S.pending=up.concat(S.pending.filter(o=>o.action==='del'));S.synced=true;save();
+    }
+    const n=S.pending.length;
+    if(n){data=await call({action:'batch',ops:S.pending.slice(0,n)});S.pending=S.pending.slice(n)}
+    else if(!data)data=await call();
+    let exp=data.exp;
+    for(const o of S.pending){if(o.action==='add'&&!exp.some(e=>e.id===o.item.id))exp.push(o.item);if(o.action==='del')exp=exp.filter(e=>e.id!==o.id)}
+    S.exp=exp;save();render();
+    const t=new Date();status('已同步 '+String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0')+'（點一下重新同步）','ok');
+  }catch(e){status('連不上雲端，'+(S.pending.length?S.pending.length+' 筆等待上傳':'顯示的是上次的資料')+'（點一下重試）','bad')}
+  syncing=false;if(again)sync();
+}
+$('#sync').addEventListener('click',sync);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)sync()});
+setInterval(()=>{if(!document.hidden)sync()},30000);
+build();render();sync();
+if(SYNC_URL)$('#foot').textContent='花費會同步到 Google 試算表，兩支手機都看得到；沒網路時先存在手機，連上後自動上傳。';
 // highlight today's tab and jump to it
 (function(){const n=new Date(),id='d'+String(n.getMonth()+1).padStart(2,'0')+String(n.getDate()).padStart(2,'0');
   const a=document.querySelector(`nav a[data-d="${id}"]`);if(a&&n.getFullYear()===2026){a.classList.add('on');a.scrollIntoView({inline:'center',block:'nearest'})}})();
