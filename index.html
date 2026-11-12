@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>重慶之旅 11/14–11/21</title>
+<style>
+:root{--bg:#faf5ef;--card:#fff;--ink:#2a211c;--mute:#7b6e64;--line:#eadfd3;--red:#b03020;--red-soft:#fbe9e4;--gold:#c98a1b;--ok:#2f7d5b}
+@media (prefers-color-scheme:dark){:root{--bg:#1b1614;--card:#262019;--ink:#f3ebe3;--mute:#a99c90;--line:#3a3129;--red:#ef7a66;--red-soft:#3b231e;--gold:#e5b04c;--ok:#6fc49c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
+header{background:var(--red);color:#fff;padding:20px 16px 16px}
+@media (prefers-color-scheme:dark){header{background:#7d2418}}
+header h1{margin:0;font-size:24px;letter-spacing:.05em}
+header p{margin:4px 0 0;opacity:.85;font-size:14px}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 80px}
+.sum{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:-10px;position:relative;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.sum .big{font-size:28px;font-weight:700;color:var(--red);font-variant-numeric:tabular-nums}
+.sum .row{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:var(--mute);margin-top:4px}
+.sum .row b{color:var(--ink);font-variant-numeric:tabular-nums}
+.rate{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--mute);margin-top:8px}
+.rate input{width:64px}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;gap:8px;overflow-x:auto;padding:10px 0;margin-top:8px;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{flex:none;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:14px}
+nav a.on{background:var(--red);border-color:var(--red);color:#fff}
+@media (prefers-color-scheme:dark){nav a.on{color:#1b1614}}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-top:14px;overflow:hidden;scroll-margin-top:60px}
+section h2{margin:0;padding:12px 16px;font-size:17px;background:var(--red-soft);color:var(--red);display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+section h2 small{font-weight:400;font-size:13px;color:var(--mute);white-space:nowrap}
+.tl{list-style:none;margin:0;padding:8px 16px}
+.tl li{display:grid;grid-template-columns:62px 1fr;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.tl li:last-child{border:0}
+.tl .t{font-weight:700;color:var(--gold);font-size:14px;padding-top:2px;font-variant-numeric:tabular-nums}
+.tl .d b{display:block}
+.tl .d span{color:var(--mute);font-size:14px}
+.tip{margin:0 16px 10px;padding:8px 12px;border-left:3px solid var(--gold);background:var(--bg);font-size:14px;border-radius:0 8px 8px 0}
+.tip.rain{border-left-color:#3b82c4}
+.hotel{padding:10px 16px 14px;font-size:15px}
+.hotel b{display:block;font-size:16px}
+.hotel span{color:var(--mute);font-size:14px}
+.exp{border-top:1px solid var(--line);padding:10px 16px 14px}
+.exp h3{margin:0 0 6px;font-size:14px;color:var(--mute);display:flex;justify-content:space-between}
+.exp h3 b{color:var(--ink);font-variant-numeric:tabular-nums}
+.item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:15px}
+.item .n{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item .c{font-size:12px;color:var(--mute);border:1px solid var(--line);border-radius:6px;padding:0 6px;flex:none}
+.item .a{font-variant-numeric:tabular-nums;font-weight:600;flex:none}
+.item button{border:0;background:none;color:var(--mute);font-size:18px;padding:0 4px;cursor:pointer}
+form{display:grid;grid-template-columns:1fr 92px;gap:6px;margin-top:8px}
+form .r2{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 72px;gap:6px}
+input,select,button.add,.tools button{font:inherit;font-size:16px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);min-width:0;width:100%}
+button.add{background:var(--red);border-color:var(--red);color:#fff;font-weight:600;cursor:pointer}
+@media (prefers-color-scheme:dark){button.add{color:#1b1614}}
+.cats{padding:10px 16px}
+.cats div{display:flex;justify-content:space-between;padding:4px 0;font-size:15px;border-bottom:1px dashed var(--line)}
+.cats div:last-child{border:0}
+.tools{display:flex;gap:8px;padding:0 16px 14px}
+.tools button{cursor:pointer;font-size:14px}
+ul.plain{margin:0;padding:10px 16px 12px 34px;font-size:15px}
+ul.plain li{margin:4px 0}
+footer{color:var(--mute);font-size:12px;text-align:center;margin-top:20px}
+</style>
+</head>
+<body>
+<header><div style="max-width:760px;margin:0 auto">
+<h1>重慶之旅</h1><p>2026/11/14（六）– 11/21（六）・台南 → 金門 → 廈門 → 重慶</p>
+</div></header>
+<div class="wrap">
+<div class="sum">
+  <div style="font-size:13px;color:var(--mute)">目前總花費（換算台幣）</div>
+  <div class="big" id="total">NT$0</div>
+  <div class="row"><span>人民幣 <b id="tCny">¥0</b></span><span>台幣 <b id="tTwd">NT$0</b></span></div>
+  <div class="rate">匯率：1 人民幣 = <input id="rate" type="number" step="0.01" inputmode="decimal"> 台幣</div>
+</div>
+<nav id="nav"></nav>
+<div id="days"></div>
+
+<section id="s-hotel"><h2>住宿 <small>11/14–11/20・6 晚</small></h2><div class="hotel">
+<b>重慶觀音橋步行街世紀新都亞朵酒店</b>
+<span>江北區觀音橋步行街・地鐵 3 號線／9 號線「觀音橋站」<br>
+去解放碑、洪崖洞：3 號線到牛角沱轉 2 號線到臨江門<br>
+去小什字、較場口、磁器口：3 號線到兩路口轉 1 號線<br>
+去李子壩：3 號線到牛角沱轉 2 號線，1 站就到<br>
+去江北機場 T3：計程車約 30 分鐘<br>
+11/20 廈門那一晚的住宿還沒訂的話要補訂。</span></div></section>
+
+<section id="s-cat"><h2>分類統計 <small>換算台幣</small></h2><div class="cats" id="cats"></div>
+<div class="tools"><button id="csv">匯出 CSV</button><button id="reset">清空全部花費</button></div></section>
+
+<section id="s-tips"><h2>出發前提醒</h2><ul class="plain">
+<li><b>證件：</b>小三通要帶護照＋台胞證，兩本都要在效期內。</li>
+<li><b>船票報到：</b>建議開船前 1 小時到碼頭，一般開船前 30 分鐘停止報到（以船票說明為準）。</li>
+<li><b>深夜抵達重慶：</b>23:15 落地時地鐵多半已收班，先用滴滴或訂好接機。</li>
+<li><b>付款與地圖：</b>先綁好支付寶／微信支付；地圖用高德，叫車用滴滴。</li>
+<li><b>火鍋底料：</b>多半是牛油做的，屬動物產品，帶回台灣（含金門入境）可能被禁止或需申報，買之前先查防檢署規定，或改買清油（素）底料。</li>
+<li><b>天氣：</b>11 月重慶約 12–18°C、潮濕多霧，帶薄外套、穿好走的鞋。南山夜景看天氣，霧大就換一晚。</li>
+<li><b>省錢吃法：</b>早餐路邊小麵 7–10 元；火鍋去大坪、上新街巷弄的洞子火鍋，人均 60–100 元；沾碟「香油＋蒜泥」，配唯怡豆奶解辣。</li>
+</ul></section>
+<footer>花費只存在這台手機／電腦的瀏覽器裡，換裝置不會同步，可用「匯出 CSV」備份。</footer>
+</div>
+<script>
+const DAYS=[
+{id:'pre',tab:'行前',title:'行前預訂',sub:'機票・船票',items:[],tip:'已訂好的機票、船票先記在這裡，可以自己修改或刪除。'},
+{id:'d1114',rain:'船班會因風浪或濃霧停航，出發當天早上先查金門港務處或船公司公告；下雨不影響行程，接送多留 10 分鐘。',tab:'11/14',title:'11/14（六）出發：台南 → 金門 → 廈門 → 重慶',sub:'移動日',items:[
+['09:40','媽媽搭機 台南 → 金門','立榮 B7-8981，10:30 抵達金門尚義機場'],
+['10:30','到金門機場接媽媽','領完行李約 10:45–10:50，直接上車'],
+['10:50','金門機場 → 水頭碼頭','車程約 20–25 分鐘，11:20 前到碼頭報到、過海關'],
+['12:30','水頭 → 廈門五通碼頭','和平新星輪，航程約 30 分鐘，下船後入境'],
+['13:30','廈門午餐＋休息','五通碼頭到高崎機場約 20 分鐘車程。帶著行李不建議跑遠，可在碼頭／機場附近吃飯，或先到機場寄放行李再出去走走'],
+['18:00','抵達廈門高崎機場 T4','提早 2 小時以上報到、托運、吃晚餐'],
+['20:25','廈門 → 重慶','山東航空 SC2141，23:15 抵達江北機場 T3'],
+['23:30','計程車／滴滴到觀音橋亞朵酒店','車程約 30 分鐘；地鐵已收班，建議先訂接機。半夜入住，可先跟飯店說會晚到'],
+],tip:'接機到開船只有 2 小時，班機若延誤超過 40 分鐘就會很趕，當天早上先查航班動態。'},
+{id:'d1115',rain:'白象居樓梯濕滑可跳過。改成：解放碑商場 → 來福士（室內逛街、觀景台）→ 洪崖洞（本身是室內 11 層樓，逛街吃東西都不淋雨）。',tab:'11/15',title:'11/15（日）渝中老城：全程走路',sub:'Day 1',items:[
+['上午','睡飽再出門','前一晚半夜才到，早餐在觀音橋吃一碗重慶小麵'],
+['中午','飯店 → 小什字','3 號線觀音橋站 → 兩路口站轉 1 號線 → 小什字站，約 25 分鐘'],
+['下午','白象居','沒有電梯的 24 層網紅樓。1/6 號線小什字站 7 號口步行 8 分鐘，爬到 10 樓、15 樓就夠'],
+['下午','魁星樓／皇冠大扶梯','22 樓空中廊橋、龍貓背景牆。離解放碑 540 公尺'],
+['傍晚','解放碑步行街＋八一路好吃街','2 號線臨江門站，晚餐在好吃街解決'],
+['晚上','洪崖洞夜景','開燈 18:30–23:00。週日人多，走到千廝門大橋或對岸大劇院江灘拍全景和倒影，看完可逛來福士'],
+['回程','臨江門 → 飯店','2 號線臨江門站 → 牛角沱站轉 3 號線 → 觀音橋站'],
+],tip:'想進洪崖洞裡面逛，改到隔天（週一）晚上，人會少很多。'},
+{id:'d1116',rain:'週一三峽博物館休館，不要排。磁器口撐傘照逛，茶館、小吃店多可躲雨；李子壩觀景平台看幾班車就走；鵝嶺二廠改成回觀音橋逛北城天街、大融城，晚餐洞子火鍋本來就在室內。',tab:'11/16',title:'11/16（一）磁器口 → 李子壩 → 鵝嶺 → 大坪火鍋',sub:'Day 2',items:[
+['09:00','磁器口古鎮','飯店搭 3 號線到兩路口轉 1 號線，磁器口站 1 號口，約 40 分鐘。越早人越少；陳麻花先試吃記牌子'],
+['中午','搭地鐵到李子壩','約 20 分鐘'],
+['下午','李子壩輕軌穿樓','2 號線李子壩站。1 號口觀景平台最經典；2 號口攬勝亭拍全貌人少。約 10 分鐘一班'],
+['下午','鵝嶺二廠文創公園','就在李子壩旁邊，有上坡，可搭計程車幾分鐘到'],
+['晚餐','大坪洞子火鍋','九宮格點毛肚、鴨腸、老肉片，人均約 60–100 元'],
+['晚上','回飯店順路逛觀音橋','飯店就在觀音橋步行街，北城天街、好吃街都在樓下；想進洪崖洞裡面逛也可以排今晚'],
+]},
+{id:'d1117',rain:'改成室內日：重慶中國三峽博物館＋人民大禮堂（博物館免費，帶證件）→ 湖廣會館或羅漢寺 → 晚上來福士或觀音橋。長江索道下雨照開但霧大看不到景；南山夜景霧雨天不要上去，改到天氣好的那晚。',tab:'11/17',title:'11/17（二）十八梯 → 長江索道 → 南岸老街 → 南山夜景',sub:'Day 3',items:[
+['上午','山城步道＋十八梯','飯店搭 3 號線到兩路口轉 1 號線，較場口站'],
+['中午','長江索道過江','小什字站 5A/5B 口，北站（新華路 153 號）往南岸，單程 20 元，可先網上訂票'],
+['下午','下浩里老街','上新街 1 號口一帶開始，全程下坡；拍全景機位、大字牆'],
+['下午','龍門浩老街','紅色大鼓、攬月台、網紅門洞'],
+['傍晚','（選配）彈子石老街','看長江與嘉陵江交匯，計程車約 10 分鐘'],
+['晚上','南山一棵樹觀景台','計程車上山，晚上 7 點後最美；晚餐可吃南山泉水雞，回程叫車回飯店'],
+],tip:'想在夕陽時搭索道，就倒過來走：下午兩江小渡到彈子石 → 龍門浩 → 下浩里 → 傍晚從南站搭索道回渝中，南山改別晚去。'},
+{id:'d1118',rain:'一日遊團雨天照常出發。帶輕便雨衣（比傘方便）、防滑鞋，地縫裡本來就濕；霧大時天生三橋反而有仙境感。若有暴雨預警，前一晚問旅行社能否改期。',tab:'11/18',title:'11/18（三）武隆天生三橋＋龍水峽地縫',sub:'Day 4',items:[
+['07:00','跟一日遊團出發','選純玩團、無購物站，確認接駁車和電梯費用有沒有含；問清楚能不能在觀音橋附近上車'],
+['整天','天生三橋＋龍水峽地縫','帶夠水和零食；廁所少，看到就去；樓梯多又濕滑，穿運動鞋'],
+['19:30','回到市區','晚餐後早點休息'],
+]},
+{id:'d1119',rain:'九黎城多是戶外階梯和木造建築，小雨撐傘可逛。大雨就取消彭水，改去三峽博物館（如果 11/17 沒去）、重慶建川博物館（防空洞裡的博物館），下午提早採買。高鐵票記得先退。',tab:'11/19',title:'11/19（四）彭水蚩尤九黎城＋採買',sub:'Day 5',items:[
+['上午','重慶東 → 彭水西','高鐵約 40 分鐘，彭水西到九黎城車程約 10 分鐘。重慶東站在南岸茶園，從觀音橋過去要預留 50 分鐘以上（計程車或地鐵，出發前用高德查），來回票先訂'],
+['白天','蚩尤九黎城','開放 8:00–18:00，門票 81 元，微信「彭水文旅」可購票'],
+['傍晚','回市區採買','解放碑重百超市：火鍋底料（橋頭、德莊、周君記）、陳麻花'],
+['晚上','整理行李','隔天一早去機場，不要排太晚'],
+],tip:'隔天 11:00 的班機，今晚請在 20:00 前回到市區。'},
+{id:'d1120',rain:'班機受天氣影響時先看航班動態。廈門下雨就逛 SM 城市廣場、萬象城，或在中山路騎樓下走，騎樓不太淋雨。',tab:'11/20',title:'11/20（五）重慶 → 廈門',sub:'回程 1',items:[
+['08:15','退房，搭車去江北機場 T3','觀音橋到機場車程約 30 分鐘，09:00 前到機場報到'],
+['11:00','重慶 → 廈門','山東航空 SC2136，13:20 抵達高崎機場 T4'],
+['14:30','廈門飯店入住','這一晚的住宿還沒看到訂單，記得訂。隔天要去五通碼頭，住島內東側或機場附近會比較順'],
+['下午','廈門走走','中山路步行街、沙坡尾，或沿環島路看海'],
+['晚上','早點休息','確認明天去碼頭的叫車時間'],
+]},
+{id:'d1121',rain:'船班若因風浪停航或延後，會影響 14:25 的班機。早上先查船班公告，有狀況立刻打給立榮改票。',tab:'11/21',title:'11/21（六）廈門 → 金門 → 台南',sub:'回程 2',items:[
+['09:15','抵達廈門五通碼頭','開船前 1 小時到，報到、出境'],
+['10:30','五通 → 金門水頭碼頭','新金祥龍輪，約 11:00 抵達，入境、領行李'],
+['11:30','水頭碼頭接媽媽 → 午餐','水頭或金城吃午餐，時間很充裕'],
+['13:00','開車到金門機場','車程約 20–25 分鐘，13:25 前到機場報到'],
+['14:25','媽媽搭機 金門 → 台南','立榮 B7-8986，15:20 抵達台南'],
+]},
+];
+const CATS=['交通','餐飲','門票','住宿','購物','其他'];
+const SEED=[
+{day:'pre',name:'台南⇄金門機票',amt:4168,cur:'TWD',cat:'交通'},
+{day:'pre',name:'金門→廈門船票（2人）',amt:301,cur:'CNY',cat:'交通'},
+{day:'pre',name:'廈門→金門船票（2人）',amt:288,cur:'CNY',cat:'交通'},
+{day:'pre',name:'廈門⇄重慶機票',amt:2644,cur:'CNY',cat:'交通'},
+];
+const SEED2=[
+{id:'h0',day:'pre',name:'重慶亞朵酒店 11/14–11/19（5晚）',amt:2119.84,cur:'CNY',cat:'住宿'},
+{id:'h1',day:'pre',name:'重慶亞朵酒店 11/19–11/20（1晚）',amt:441.36,cur:'CNY',cat:'住宿'},
+];
+const KEY='cq-trip-2026';
+let mem=null;
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&Array.isArray(s.exp))return s}catch(e){}
+  return mem||{rate:4.5,exp:SEED.map((e,i)=>({...e,id:'s'+i}))}}
+function save(){mem=S;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+let S=load();
+if(!S.v||S.v<2){S.exp.push(...SEED2);S.v=2;save()}
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function money(n,cur){return (cur==='CNY'?'¥':'NT$')+(Math.round(n*100)/100).toLocaleString('zh-TW')}
+const twd=e=>e.cur==='CNY'?e.amt*S.rate:e.amt;
+
+function build(){
+  $('#nav').innerHTML=DAYS.map(d=>`<a href="#${d.id}" data-d="${d.id}">${d.tab}</a>`).join('')+'<a href="#s-hotel">住宿</a><a href="#s-cat">統計</a><a href="#s-tips">提醒</a>';
+  $('#days').innerHTML=DAYS.map(d=>`<section id="${d.id}">
+   <h2><span>${d.title}</span><small>${d.sub}</small></h2>
+   ${d.items.length?`<ul class="tl">${d.items.map(i=>`<li><div class="t">${i[0]}</div><div class="d"><b>${i[1]}</b><span>${i[2]}</span></div></li>`).join('')}</ul>`:''}
+   ${d.rain?`<p class="tip rain"><b>雨天備案：</b>${d.rain}</p>`:''}
+   ${d.tip?`<p class="tip" ${d.items.length?'':'style="margin-top:12px"'}>${d.tip}</p>`:''}
+   <div class="exp"><h3><span>這天的花費</span><b data-sub="${d.id}"></b></h3><div data-list="${d.id}"></div>
+   <form data-f="${d.id}"><input name="name" placeholder="項目（例：火鍋）" required><input name="amt" type="number" step="0.01" min="0" inputmode="decimal" placeholder="金額" required>
+   <div class="r2"><select name="cur"><option value="CNY">人民幣 ¥</option><option value="TWD">台幣 NT$</option></select><select name="cat">${CATS.map(c=>`<option>${c}</option>`).join('')}</select><button class="add">記帳</button></div></form></div>
+  </section>`).join('');
+  document.querySelectorAll('form').forEach(f=>f.addEventListener('submit',ev=>{ev.preventDefault();
+    const amt=parseFloat(f.amt.value);if(!f.name.value.trim()||!(amt>=0))return;
+    S.exp.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,5),day:f.dataset.f,name:f.name.value.trim(),amt,cur:f.cur.value,cat:f.cat.value});
+    f.name.value='';f.amt.value='';save();render();}));
+  $('#days').addEventListener('click',ev=>{const b=ev.target.closest('[data-del]');if(!b)return;S.exp=S.exp.filter(e=>e.id!==b.dataset.del);save();render();});
+}
+function render(){
+  $('#rate').value=S.rate;
+  let cny=0,tw=0;const byCat={};
+  DAYS.forEach(d=>{const list=S.exp.filter(e=>e.day===d.id);let sub=0;
+    list.forEach(e=>{sub+=twd(e);if(e.cur==='CNY')cny+=e.amt;else tw+=e.amt;byCat[e.cat]=(byCat[e.cat]||0)+twd(e)});
+    document.querySelector(`[data-list="${d.id}"]`).innerHTML=list.length?list.map(e=>`<div class="item"><span class="n">${esc(e.name)}</span><span class="c">${esc(e.cat)}</span><span class="a">${money(e.amt,e.cur)}</span><button data-del="${e.id}" aria-label="刪除 ${esc(e.name)}">×</button></div>`).join(''):'<div style="color:var(--mute);font-size:14px">還沒有記錄</div>';
+    document.querySelector(`[data-sub="${d.id}"]`).textContent='約 '+money(Math.round(sub),'TWD');});
+  $('#tCny').textContent=money(cny,'CNY');$('#tTwd').textContent=money(tw,'TWD');
+  $('#total').textContent=money(Math.round(cny*S.rate+tw),'TWD');
+  $('#cats').innerHTML=CATS.map(c=>`<div><span>${c}</span><b>${money(Math.round(byCat[c]||0),'TWD')}</b></div>`).join('');
+}
+$('#rate').addEventListener('change',e=>{const v=parseFloat(e.target.value);if(v>0){S.rate=v;save();render()}});
+$('#csv').addEventListener('click',()=>{
+  const rows=[['日期','項目','分類','金額','幣別','換算台幣']].concat(S.exp.map(e=>[(DAYS.find(d=>d.id===e.day)||{}).tab||'',e.name,e.cat,e.amt,e.cur,Math.round(twd(e))]));
+  const csv='﻿'+rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='重慶花費.csv';a.click();});
+let armed=0;
+$('#reset').addEventListener('click',e=>{if(Date.now()-armed<4000){S.exp=[];save();render();e.target.textContent='清空全部花費';armed=0}else{armed=Date.now();e.target.textContent='再按一次確認清空'}});
+build();render();
+// highlight today's tab and jump to it
+(function(){const n=new Date(),id='d'+String(n.getMonth()+1).padStart(2,'0')+String(n.getDate()).padStart(2,'0');
+  const a=document.querySelector(`nav a[data-d="${id}"]`);if(a&&n.getFullYear()===2026){a.classList.add('on');a.scrollIntoView({inline:'center',block:'nearest'})}})();
+</script>
+</body>
+</html>
